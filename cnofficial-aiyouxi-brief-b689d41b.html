@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 稳定入口与功能介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf9f5;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', sans-serif;
+            color: #2c2b28;
+            line-height: 1.7;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
+            padding: 2.8rem 2.4rem 3.2rem;
+        }
+
+        /* 主视觉区 */
+        .hero {
+            text-align: center;
+            padding: 1.2rem 0 1.8rem 0;
+            border-bottom: 1px solid #ece8e0;
+            margin-bottom: 2.6rem;
+        }
+
+        .hero-icon {
+            font-size: 3.8rem;
+            letter-spacing: 6px;
+            background: #f1ede6;
+            display: inline-block;
+            width: 90px;
+            height: 90px;
+            line-height: 96px;
+            border-radius: 50%;
+            margin-bottom: 0.8rem;
+            color: #6f5e47;
+            box-shadow: inset 0 -2px 0 #d9d0c0;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #3f3a32;
+            margin-bottom: 0.3rem;
+        }
+
+        .hero .sub {
+            font-size: 1rem;
+            color: #7e7468;
+            background: #f3efe9;
+            display: inline-block;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* 文章排版通用 */
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin: 2.2rem 0 1.2rem 0;
+            padding-bottom: 0.2rem;
+            border-left: 5px solid #c0b29e;
+            padding-left: 1rem;
+            color: #3f3a32;
+            letter-spacing: 1px;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #3c3833;
+        }
+
+        a {
+            color: #7d6b52;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #cdc3b4;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+
+        a:hover {
+            color: #4f3f2e;
+            text-decoration-color: #9c8b76;
+        }
+
+        /* 信息卡片组 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.8rem 0 1rem;
+        }
+
+        .card {
+            background: #f8f6f1;
+            border-radius: 20px;
+            padding: 1.5rem 1.4rem;
+            border: 1px solid #e9e3d9;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #4c443b;
+        }
+
+        .card h3 span {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #4f4a41;
+            margin-bottom: 0.2rem;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #e5ddd2;
+            font-size: 0.75rem;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            color: #5d5345;
+            margin-top: 0.6rem;
+        }
+
+        /* 适合人群卡片（不同底色） */
+        .audience-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0 1.8rem;
+        }
+
+        .audience-item {
+            background: #f4f0ea;
+            border-radius: 40px;
+            padding: 0.5rem 1.4rem;
+            font-size: 0.95rem;
+            border: 1px solid #e0d8cb;
+            color: #3f3a32;
+        }
+
+        .audience-item strong {
+            font-weight: 500;
+            color: #5a4e3d;
+        }
+
+        /* 引用块 / 提示框 */
+        .callout {
+            background: #f3efe8;
+            border-left: 6px solid #c0b29e;
+            padding: 1.2rem 1.6rem;
+            border-radius: 0 16px 16px 0;
+            margin: 1.8rem 0 2rem;
+            color: #3d3831;
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        .callout strong {
+            font-weight: 500;
+            color: #4f4437;
+        }
+
+        .faq-mini {
+            background: #fcfaf7;
+            border: 1px solid #ece6dd;
+            border-radius: 20px;
+            padding: 1.2rem 1.6rem;
+            margin: 2rem 0 0.8rem;
+        }
+
+        .faq-mini dt {
+            font-weight: 500;
+            margin: 0.8rem 0 0.2rem 0;
+            color: #4f4437;
+        }
+
+        .faq-mini dt:first-child {
+            margin-top: 0;
+        }
+
+        .faq-mini dd {
+            margin-left: 0.2rem;
+            font-size: 0.95rem;
+            color: #5b554b;
+            border-left: 2px solid #ddd6ca;
+            padding-left: 0.8rem;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #e7e0d6;
+            margin: 2.2rem 0 1.2rem;
+        }
+
+        .footer-note {
+            font-size: 0.85rem;
+            color: #8a8174;
+            text-align: center;
+            margin-top: 2.8rem;
+            border-top: 1px solid #efebe3;
+            padding-top: 1.8rem;
+            letter-spacing: 0.3px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .audience-cards {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+
+            .audience-item {
+                text-align: center;
+            }
+
+            .callout {
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 主视觉 -->
+    <div class="hero">
+        <div class="hero-icon">🎮</div>
+        <h1>爱游戏</h1>
+        <div class="sub">稳定入口 · 页面说明</div>
+    </div>
+
+    <!-- 介绍段落 -->
+    <p><a href="https://cnofficial-aiyouxi.com.cn">爱游戏</a> 是一个为日常娱乐和信息浏览设计的轻量站点，提供直接且稳定的访问方式。这里没有复杂的跳转或多余的中转页面，你可以把它当作一个常备的入口来使用，随时打开、随时离开，不需要记住繁琐的路径。</p>
+
+    <p>我们持续关注页面的可读性与基础体验，力求在简洁的结构里让每个访客都能快速找到自己需要的功能模块。本文整理了该站点的几个主要用途，以及哪些使用者可能会觉得顺手，供你参考。</p>
+
+    <!-- 用途卡片 -->
+    <h2>📌 主要用途</h2>
+    <div class="card-grid">
+        <div class="card">
+            <h3><span>🕹️</span> 快速启动</h3>
+            <p>无需注册或下载额外组件，打开即用。适合临时需要查询或浏览的场景，也适合作为浏览器的固定标签页。</p>
+            <span class="tag">零门槛</span>
+        </div>
+        <div class="card">
+            <h3><span>📂</span> 信息汇集</h3>
+            <p>把分散的常用链接与内容做了归拢，页面内就能找到关键功能与分类，减少在多个窗口间切换的麻烦。</p>
+            <span class="tag">结构清晰</span>
+        </div>
+        <div class="card">
+            <h3><span>🔍</span> 轻量搜索</h3>
+            <p>内置基础搜索与筛选，可以快速定位自己感兴趣的游戏或条目，不需要翻页或等待加载过多元素。</p>
+            <span class="tag">效率优先</span>
+        </div>
+        <div class="card">
+            <h3><span>🧩</span> 灵活适配</h3>
+            <p>页面布局对手机、平板和桌面都做了适配，无论在哪种屏幕上都保持可用的阅读与操作体验。</p>
+            <span class="tag">响应式</span>
+        </div>
+    </div>
+
+    <!-- 适合人群 -->
+    <h2>👥 适合人群</h2>
+    <div class="audience-cards">
+        <span class="audience-item"><strong>日常玩家</strong> — 需要稳定的页面入口，不追求花哨特效</span>
+        <span class="audience-item"><strong>信息收集者</strong> — 习惯把常用站点整理成列表，快速调取</span>
+        <span class="audience-item"><strong>极简偏好者</strong> — 喜欢干净、低干扰的浏览环境</span>
+        <span class="audience-item"><strong>偶尔访客</strong> — 不需要注册，打开即用，用完即走</span>
+    </div>
+
+    <!-- 引用块 / 提示框 -->
+    <div class="callout">
+        <p><strong>💡 提示：</strong> 如果你之前遇到过无法稳定访问同类站点的情况，可以尝试将 <a href="https://cnofficial-aiyouxi.com.cn">爱游戏</a> 加入浏览器书签或收藏夹。该入口保持长期可用，页面结构也经过基础优化，加载速度相对稳定。</p>
+        <p style="margin-top:0.6rem;">另外，站内没有强制弹出广告或自动播放内容，浏览过程比较安静，适合需要专注阅读或短时使用的场景。</p>
+    </div>
+
+    <!-- 自然链接段落 (已在上方嵌入) + FAQ 摘要 -->
+    <h2>❓ 常见问题摘要</h2>
+    <div class="faq-mini">
+        <dl>
+            <dt>这个页面适合新手吗？</dt>
+            <dd>页面没有复杂的层级，打开后就能看到主要功能入口，即使第一次访问也不会觉得困惑。</dd>
+
+            <dt>是否需要在手机上做额外设置？</dt>
+            <dd>不需要。页面已经针对小屏做了样式调整，直接使用浏览器打开即可正常显示和操作。</dd>
+
+            <dt>链接会经常变动吗？</dt>
+            <dd>目前指向的是固定页面，如有调整会在站内说明。你也可以通过 <a href="https://cnofficial-aiyouxi.com.cn">爱游戏</a> 这个链接确认最新状态。</dd>
+        </dl>
+    </div>
+
+    <hr>
+
+    <!-- 收尾段落：再次自然提及 -->
+    <p>如果你正在寻找一个低干扰、可直接访问的页面，不妨把 <a href="https://cnofficial-aiyouxi.com.cn">爱游戏</a> 保留在浏览器标签栏。它不一定适合所有场景，但对于常规的信息浏览与快速启动来说，是一个实在的备选。</p>
+
+    <div class="footer-note">
+        页面说明 · 稳定入口 · 信息卡片式整理
+    </div>
+
+</div>
+</body>
+</html>
