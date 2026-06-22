@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>满冠体育 · 资料索引与知识入口</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #f0f2f5;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e1e2a;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+        .page {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* header & hero */
+        .hero {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
+            padding: 2.8rem 2rem 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.6rem;
+            color: #111827;
+        }
+        .hero .sub {
+            font-size: 1rem;
+            color: #4b5563;
+            max-width: 600px;
+            margin: 0 auto 0.8rem;
+            font-weight: 400;
+        }
+        .hero .badge {
+            display: inline-block;
+            background: #eef2ff;
+            color: #3b4f8a;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #d0d9f0;
+            margin-top: 0.5rem;
+        }
+
+        /* 卡片通用 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.03);
+            padding: 1.8rem 1.5rem 1.8rem;
+            transition: box-shadow 0.15s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.05);
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1f2937;
+            border-left: 4px solid #6b7fb5;
+            padding-left: 0.7rem;
+        }
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #374151;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card li {
+            padding: 0.3rem 0 0.3rem 1.2rem;
+            position: relative;
+        }
+        .card li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #6b7fb5;
+        }
+        .full-card {
+            grid-column: 1 / -1;
+        }
+
+        /* 说明区 (提示) */
+        .notice-bar {
+            background: #f9fafc;
+            border-radius: 14px;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: flex-start;
+            border: 1px solid #e5e9f0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+        }
+        .notice-icon {
+            font-size: 1.4rem;
+            margin-right: 1rem;
+            line-height: 1.4;
+            color: #5f6f98;
+        }
+        .notice-content {
+            font-size: 0.95rem;
+            color: #2d3748;
+        }
+        .notice-content strong {
+            font-weight: 600;
+        }
+
+        /* 相关信息区 (faq摘要) */
+        .faq-box {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.03);
+            padding: 1.8rem 1.8rem 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .faq-box h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1f2937;
+        }
+        .faq-item {
+            margin-bottom: 0.9rem;
+            border-bottom: 1px solid #edf2f7;
+            padding-bottom: 0.8rem;
+        }
+        .faq-item:last-child {
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .faq-q {
+            font-weight: 500;
+            color: #2a3b5e;
+            margin-bottom: 0.15rem;
+        }
+        .faq-a {
+            color: #4b5563;
+            font-size: 0.9rem;
+        }
+
+        /* link */
+        .inline-link {
+            color: #3b5290;
+            text-decoration: none;
+            border-bottom: 1px dashed #a2b5db;
+            font-weight: 500;
+            transition: border 0.1s;
+        }
+        .inline-link:hover {
+            border-bottom: 2px solid #2c3f70;
+        }
+
+        /* footer */
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #7b89a3;
+            border-top: 1px solid #dce2ec;
+            padding-top: 1.5rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 0.8rem; }
+            .hero { padding: 1.8rem 1.2rem; }
+            .hero h1 { font-size: 1.7rem; }
+            .card-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .card { padding: 1.4rem; }
+            .notice-bar { flex-direction: column; align-items: flex-start; }
+            .notice-icon { margin-bottom: 0.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero -->
+    <div class="hero">
+        <h1>满冠体育 · 资料索引</h1>
+        <div class="sub">
+            从信息整理到知识复用，围绕体育产业与运动科学构建可检索的内容节点。
+        </div>
+        <span class="badge">v1.0 知识库入口</span>
+    </div>
+
+    <!-- 卡片区：目录感布局 两列 -->
+    <div class="card-grid">
+
+        <div class="card">
+            <div class="card-title">观点与专题</div>
+            <ul>
+                <li>运动训练周期化 · 框架笔记</li>
+                <li>青少年体能发展路径</li>
+                <li>赛事运营与数据管理</li>
+                <li>运动康复基础索引</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <div class="card-title">工具与参考</div>
+            <ul>
+                <li>术语对照表 · 中英体育词汇</li>
+                <li>常用评估标准（FMS / TPI）</li>
+                <li>文献检索策略与数据库</li>
+                <li>课程设计模板（PDF）</li>
+            </ul>
+        </div>
+
+        <div class="card full-card">
+            <div class="card-title">关于内容来源</div>
+            <p>
+                本索引以资料整理为起点，聚合来自公开课程、期刊、行业报告以及 
+                <a href="https://main-manguansports.com" class="inline-link">满冠体育</a> 
+                知识板块的原始素材。每个条目均标注来源与修订日期，便于追溯与交叉引用。
+                当前收录方向以运动训练、场馆运营及运动教育为主，后续将逐步扩展至体育科技与政策解析。
+            </p>
+        </div>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="notice-bar">
+        <div class="notice-icon">ⓘ</div>
+        <div class="notice-content">
+            <strong>使用提示：</strong> 本页为静态导航入口，不直接存储文件。部分资料链接指向 
+            <a href="https://main-manguansports.com" class="inline-link">满冠体育</a> 
+            中的公开页面或资源页。建议搭配浏览器书签或本地笔记工具进行二次整理。
+            如检索到过时信息，欢迎通过对应页面反馈渠道提交更正。
+        </div>
+    </div>
+
+    <!-- 相关信息区 / FAQ摘要 -->
+    <div class="faq-box">
+        <h3>常见信息点 · 摘要</h3>
+
+        <div class="faq-item">
+            <div class="faq-q">Q: 如何快速查找特定运动项目资料？</div>
+            <div class="faq-a">
+                建议先使用站内搜索（<a href="https://main-manguansports.com" class="inline-link">满冠体育</a> 
+                右上角搜索框），或按「运动项目 > 体能要素 > 训练方法」三级标签筛选。本索引卡片中的专题分类也提供部分捷径。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">Q: 资料引用标准是什么？</div>
+            <div class="faq-a">
+                优先采用同行评审文献、国家体育总局发布的指导手册及经核实的行业白皮书。第三方平台内容会标注「参考」并附原文链接。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">Q: 能否直接下载训练计划？</div>
+            <div class="faq-a">
+                部分通用模板提供 PDF 或 Notion 公开页面，可前往 
+                <a href="https://main-manguansports.com" class="inline-link">满冠体育</a> 
+                「资源库」板块获取。定制化方案建议联系相关认证教练。
+            </div>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-note">
+        <span>资料整理 · 持续迭代  |  基于公开信息与 <a href="https://main-manguansports.com" class="inline-link">满冠体育</a> 内容索引</span>
+        <span style="display: block; margin-top: 0.3rem;">反馈 / 协作 · 站内信</span>
+    </div>
+
+</div>
+</body>
+</html>
